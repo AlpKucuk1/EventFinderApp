@@ -10,6 +10,9 @@ class EventDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_detail)
 
+        // Go back button
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         // Retrieve event details from the intent
         val name = intent.getStringExtra("eventName")
         val location = intent.getStringExtra("eventLocation")
@@ -22,5 +25,10 @@ class EventDetailActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.eventLocationView).text = location
         findViewById<TextView>(R.id.eventDateView).text = "$date at $time"
         findViewById<TextView>(R.id.eventDescriptionView).text = description
+    }
+    // Handle the back button click
+    override fun onSupportNavigateUp(): Boolean {
+        finish() // Goes back to the previous screen
+        return true
     }
 }
