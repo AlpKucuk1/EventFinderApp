@@ -4,31 +4,33 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import android.util.Log
 import android.widget.PopupMenu
-import android.widget.Button
+import com.example.assignment1.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var events: List<Event>
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var binding: ActivityMainBinding
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        // Initialize data binding
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Load data from CSV
         events = loadEventsFromCsv()
 
-        // Set up RecyclerView with the EventDetails adapter
-        recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = EventDetails(events) { event ->
+        // Set up RecyclerView with the EventDetails
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.adapter = EventDetails(events) { event ->
             openEventDetail(event)
         }
 
-        val filterButton = findViewById<Button>(R.id.sortButton)
-        filterButton.setOnClickListener { view ->
+        // Sort button popup
+        binding.sortButton.setOnClickListener { view ->
             val popupMenu = PopupMenu(this, view)
             popupMenu.menuInflater.inflate(R.menu.filter_menu, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener { menuItem ->
@@ -70,7 +72,7 @@ class MainActivity : AppCompatActivity() {
             "Date" -> events.sortedBy { it.date }
             else -> events
         }
-        recyclerView.adapter = EventDetails(filteredEvents) { event ->
+        binding.recyclerView.adapter = EventDetails(filteredEvents) { event ->
             openEventDetail(event)
         }
     }
@@ -81,7 +83,6 @@ class MainActivity : AppCompatActivity() {
             val inputStream = assets.open("events/MOCK_DATA.csv")
             inputStream.bufferedReader().useLines { lines ->
                 lines.drop(1).forEach { line ->
-                    Log.d("CSV", "Reading line: $line")
                     val tokens = line.split(",")
                     if (tokens.size >= 5) {
                         val event = Event(
@@ -96,9 +97,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-            Log.d("CSV", "Total events loaded: ${events.size}")
         } catch (e: Exception) {
-            Log.e("CSV", "Error reading CSV file", e)
+            e.printStackTrace()
         }
         return events
     }

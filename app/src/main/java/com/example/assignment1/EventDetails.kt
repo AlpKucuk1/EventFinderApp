@@ -1,40 +1,39 @@
 package com.example.assignment1
 
-
-
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.assignment1.databinding.ItemEventBinding
 
 class EventDetails(
     private val events: List<Event>,
     private val onItemClick: (Event) -> Unit
 ) : RecyclerView.Adapter<EventDetails.EventViewHolder>() {
 
-    inner class EventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val eventName: TextView = view.findViewById(R.id.eventName)
-        val eventLocation: TextView = view.findViewById(R.id.eventLocation)
-        val eventDate: TextView = view.findViewById(R.id.eventDate)
+    // ViewHolder class for each event item
+    inner class EventViewHolder(private val binding: ItemEventBinding) : RecyclerView.ViewHolder(binding.root) {
 
+        // Bind the event to the UI and set the click listener
         fun bind(event: Event) {
-            eventName.text = event.name
-            eventLocation.text = event.location
-            eventDate.text = "${event.date} at ${event.time}"
-            itemView.setOnClickListener { onItemClick(event) }
+            binding.event = event
+            binding.root.setOnClickListener { onItemClick(event) }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_event, parent, false)
-        return EventViewHolder(view)
+        val binding: ItemEventBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.item_event,
+            parent,
+            false
+        )
+        return EventViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        holder.bind(events[position])
+        holder.bind(events[position]) // Bind each event to the holder
     }
 
-    override fun getItemCount() = events.size
+    override fun getItemCount() = events.size // Return the number of events
 }

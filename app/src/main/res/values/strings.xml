@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Whats happening soon?</string>
-    <string name="filter_by_name">Filter by Name</string>
-    <string name="filter_by_city">Filter by City</string>
-    <string name="filter_by_date">Filter by Date</string>
-    <string name="filter_button_text">Filter</string>
+    <string name="filter_by_name">Sort by Name</string>
+    <string name="filter_by_city">Sort by City</string>
+    <string name="filter_by_date">Sort by Date</string>
+    <string name="filter_button_text">Sort</string>
 
 </resources>

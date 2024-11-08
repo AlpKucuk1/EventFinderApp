@@ -1,64 +1,61 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- Header Layout with Events title and Sort button -->
-    <LinearLayout
-        android:id="@+id/headerLayout"
+    <data>
+        <variable
+            name="mainActivity"
+            type="com.example.assignment1.MainActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/shadycyan"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp">
+        android:layout_height="match_parent">
 
-        <!-- Events title -->
-        <TextView
-            android:id="@+id/eventsTitle"
-            android:layout_width="0dp"
+        <!-- Header Layout with Events title and Sort button -->
+        <LinearLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Events"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="start"
-            android:textColor="@android:color/white" />
+            android:orientation="horizontal"
+            android:background="@color/shadycyan"
+            android:padding="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Sort button -->
-        <Button
-            android:id="@+id/sortButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sort" />
-    </LinearLayout>
+            <!-- Events title -->
+            <TextView
+                android:id="@+id/eventsTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Events"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="start"
+                android:textColor="@android:color/white" />
 
-    <!-- Progress Bar for scroll indicator -->
-    <ProgressBar
-        android:id="@+id/scrollProgressBar"
-        android:layout_width="0dp"
-        android:layout_height="4dp"
-        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:max="100"
-        android:progress="0" />
+            <!-- Sort button -->
+            <Button
+                android:id="@+id/sortButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_button_text" />
+        </LinearLayout>
 
-    <!-- RecyclerView for events -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scrollbars="vertical"
-        android:fadeScrollbars="true"
-        android:scrollbarThumbVertical="@drawable/custom_scrollbar_thumb"
-        app:layout_constraintTop_toBottomOf="@id/scrollProgressBar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!-- RecyclerView for events -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="true"
+            android:scrollbarThumbVertical="@drawable/custom_scrollbar_thumb"
+            app:layout_constraintTop_toBottomOf="@id/headerLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,34 +1,40 @@
 package com.example.assignment1
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.example.assignment1.databinding.ActivityEventDetailBinding
 
 class EventDetailActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityEventDetailBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_event_detail)
+
+        // Initialize data binding
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_event_detail)
 
         // Go back button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        // Retrieve event details from the intent
-        val name = intent.getStringExtra("eventName")
-        val location = intent.getStringExtra("eventLocation")
-        val date = intent.getStringExtra("eventDate")
-        val time = intent.getStringExtra("eventTime")
-        val description = intent.getStringExtra("eventDescription")
+        // Retrieve event details from the intent and create an Event object
+        val event = Event(
+            id = intent.getIntExtra("eventId", 0),
+            name = intent.getStringExtra("eventName") ?: "",
+            location = intent.getStringExtra("eventLocation") ?: "",
+            date = intent.getStringExtra("eventDate") ?: "",
+            time = intent.getStringExtra("eventTime") ?: "",
+            description = intent.getStringExtra("eventDescription") ?: ""
+        )
 
-        // Set the retrieved data to TextViews
-        findViewById<TextView>(R.id.eventNameView).text = name
-        findViewById<TextView>(R.id.eventLocationView).text = location
-        findViewById<TextView>(R.id.eventDateView).text = "$date at $time"
-        findViewById<TextView>(R.id.eventDescriptionView).text = description
+        // Bind the event data to the layout
+        binding.event = event
     }
+
     // Handle the back button click
     override fun onSupportNavigateUp(): Boolean {
-        finish() // Goes back to the previous screen
+        finish()
         return true
     }
 }
