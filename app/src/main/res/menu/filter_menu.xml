@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/filter_name"
+        android:title="@string/filter_by_name" />
+    <item
+        android:id="@+id/filter_city"
+        android:title="@string/filter_by_city" />
+    <item
+        android:id="@+id/filter_date"
+        android:title="@string/filter_by_date" />
+</menu>

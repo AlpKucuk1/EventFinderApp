@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Assignment1</string>
+    <string name="app_name">Whats happening soon?</string>
+    <string name="filter_by_name">Filter by Name</string>
+    <string name="filter_by_city">Filter by City</string>
+    <string name="filter_by_date">Filter by Date</string>
+    <string name="filter_button_text">Filter</string>
+
 </resources>
