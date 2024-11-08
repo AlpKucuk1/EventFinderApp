@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.io.BufferedReader
-import java.io.InputStreamReader
 import android.util.Log
 import android.widget.PopupMenu
 import android.widget.Button
@@ -15,15 +13,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var events: List<Event>
     private lateinit var recyclerView: RecyclerView
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Load data from data
+        // Load data from CSV
         events = loadEventsFromCsv()
 
-        // Set up RecyclerView with the EventDetails
+        // Set up RecyclerView with the EventDetails adapter
         recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = EventDetails(events) { event ->
@@ -53,7 +50,6 @@ class MainActivity : AppCompatActivity() {
             }
             popupMenu.show()
         }
-
     }
 
     private fun openEventDetail(event: Event) {
@@ -85,7 +81,7 @@ class MainActivity : AppCompatActivity() {
             val inputStream = assets.open("events/MOCK_DATA.csv")
             inputStream.bufferedReader().useLines { lines ->
                 lines.drop(1).forEach { line ->
-                    Log.d("CSV", "Reading line: $line")  // Log each line
+                    Log.d("CSV", "Reading line: $line")
                     val tokens = line.split(",")
                     if (tokens.size >= 5) {
                         val event = Event(
@@ -106,8 +102,4 @@ class MainActivity : AppCompatActivity() {
         }
         return events
     }
-
-
-
-
 }

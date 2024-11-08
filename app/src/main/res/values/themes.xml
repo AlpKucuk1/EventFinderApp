@@ -2,7 +2,7 @@
     <!-- Define the custom theme for your app -->
     <style name="Theme.Assignment1" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme colors or attributes here -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/blackpearl</item>
         <item name="colorPrimaryDark">@color/purple_700</item>
         <item name="colorAccent">@color/teal_200</item>
     </style>
